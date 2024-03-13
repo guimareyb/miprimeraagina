@@ -1,13 +1,31 @@
-let nombre = "Ani";
-let ciudad = "Bs As";
-let gusto = "chocolate";
+const form = document.getElementById("form");
+const nombre_form = document.getElementById("nombre_form");
 
-let parrafo = document.querySelector(".parrafo2");
+const alerta = document.getElementById("alertas");
 
-function cambiarTexto(nombre, ciudad, gusto){
-    let contenido = `Me llamo ${nombre}, nací en ${ciudad} y vivo en Caballito. Me gusta el ${gusto} y salir a pasear en días de sol. Me encantaría aprender a programar para poder ayudar a las personas a mostrar lo que hacen`;
+function validarFormulario() {
+  let warnings = "";
+  let valido = true;
+  alerta.innerHTML = "";
 
-    return contenido;
+  if (nombre_form.value.length < 4) {
+    warnings += `El nombre debe contener más de 4 carcateres`;
+    valido = false;
+  }
+
+  if (!valido) {
+    alerta.innerHTML = warnings;
+  } else {
+    alerta.innerHTML = "Enviado";
+  }
+  return valido;
 }
 
-parrafo.innerHTML = cambiarTexto(nombre, ciudad, gusto);
+form.addEventListener("submit", (e) => {
+  if (validarFormulario()) {
+    // Si la validación es exitosa, puedes enviar el formulario
+    formulario.submit();
+  } else {
+    e.preventDefault(); // Evita que el formulario se envíe automáticamente
+  }
+});
